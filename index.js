@@ -1,2 +1,1 @@
-import openInTerminal from './lib.js';
-export default openInTerminal;
+module.exports = require("./lib");

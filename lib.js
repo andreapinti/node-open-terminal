@@ -1,6 +1,9 @@
-import {temporaryFile} from 'tempy';
-import fs from 'fs';
-import { spawn } from 'child_process';
+const tmp = require("tmp");
+const fs = require("fs");
+const spawn  = require('child_process').spawn;
+
+
+
 function openInTerminal(command, cwd){
     return new Promise((resolve, reject) => {
         switch(process.platform){
@@ -12,7 +15,7 @@ function openInTerminal(command, cwd){
     })
 }
 function _execDarwin(command, cwd, resolve){
-    const file = temporaryFile({extension: 'command'});
+    const file = tmp.tmpNameSync({postfix: 'command'});
     const cmd = (cwd ? "cd \"" + cwd + "\" && " : "") + command
     fs.writeFileSync(file, cmd);
     fs.chmod(file,0o775, function(){
@@ -34,7 +37,7 @@ function _execLinux(command, cwd, resolve){
 }
 
 function _execWindows(command, cwd, resolve){
-    const file = temporaryFile({extension: 'bat'});
+    const file = tmp.tmpNameSync({postfix: 'bat'});
     const cmd = (cwd ? "cd \"" + cwd + "\" && " : "") + command
     fs.writeFileSync(file, cmd);
     fs.chmod(file,0o775, function(){
@@ -48,4 +51,4 @@ function _execWindows(command, cwd, resolve){
     });
 }
 
-export default openInTerminal;
+module.exports = openInTerminal;

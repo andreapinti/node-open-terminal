@@ -1,7 +1,6 @@
 {
-  "type": "module",
   "name": "node-open-terminal",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Cross-platform utility to execute a command in the terminal, programmatically",
   "main": "index.js",
   "scripts": {
@@ -17,6 +16,6 @@
   "author": "Andrea Pinti",
   "license": "ISC",
   "dependencies": {
-    "tempy": "^3.0.0"
+    "tmp": "^0.2.1"
   }
 }
